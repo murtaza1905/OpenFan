@@ -14,6 +14,10 @@ OpenFan runs as a regular app with a Dock icon and a settings window, plus a men
 
 Written from scratch in Swift + SwiftUI with a small C layer for the SMC. UI in English and Turkish (follows the system language). MIT licensed.
 
+## Download
+
+Prebuilt universal (Intel + Apple Silicon) disk image: **[Releases](https://github.com/murtaza1905/OpenFan/releases/latest)** → `OpenFan-<version>.dmg`. Drag to Applications; on first launch right-click → Open (self-signed). If macOS reports the app as damaged: `xattr -dr com.apple.quarantine /Applications/OpenFan.app`.
+
 ## Requirements
 
 - macOS 13 Ventura or newer
