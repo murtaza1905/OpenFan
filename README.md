@@ -23,7 +23,7 @@ Written from scratch in Swift + SwiftUI with a small C layer for the SMC. UI in 
 ## Build
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/murtaza1905/OpenFan.git
 cd OpenFan
 ./scripts/build.sh --install
 ```
