@@ -1,0 +1,70 @@
+name: OpenFan
+options:
+  bundleIdPrefix: com.openfan
+  createIntermediateGroups: true
+  deploymentTarget:
+    macOS: "13.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "13.0"
+    CODE_SIGN_STYLE: Automatic
+    CODE_SIGN_IDENTITY: "-"
+    ENABLE_HARDENED_RUNTIME: YES
+    SWIFT_STRICT_CONCURRENCY: minimal
+
+targets:
+  OpenFan:
+    type: application
+    platform: macOS
+    sources:
+      - path: Sources/OpenFan
+      - path: Sources/Shared
+      - path: Sources/SMC
+      - path: Resources/com.openfan.helper.plist
+        buildPhase:
+          copyFiles:
+            destination: wrapper
+            subpath: Contents/Library/LaunchDaemons
+    info:
+      path: Sources/OpenFan/Info.plist
+      properties:
+        CFBundleName: OpenFan
+        CFBundleDisplayName: OpenFan
+        CFBundleShortVersionString: "1.3.0"
+        CFBundleVersion: "4"
+        LSUIElement: false
+        LSMinimumSystemVersion: "13.0"
+        NSHumanReadableCopyright: "MIT License"
+        NSPrincipalClass: NSApplication
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations:
+          - en
+          - tr
+    settings:
+      base:
+        PRODUCT_NAME: OpenFan
+        PRODUCT_BUNDLE_IDENTIFIER: com.openfan.app
+        SWIFT_OBJC_BRIDGING_HEADER: Sources/OpenFan/OpenFan-Bridging-Header.h
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    dependencies:
+      - target: openfan-helper
+        embed: true
+        codeSign: true
+        copy:
+          destination: executables
+
+  openfan-helper:
+    type: tool
+    platform: macOS
+    sources:
+      - path: Sources/openfan-helper
+      - path: Sources/Shared
+      - path: Sources/SMC
+    settings:
+      base:
+        PRODUCT_NAME: openfan-helper
+        PRODUCT_BUNDLE_IDENTIFIER: com.openfan.helper
+        SWIFT_OBJC_BRIDGING_HEADER: Sources/openfan-helper/Helper-Bridging-Header.h
