@@ -43,7 +43,15 @@ jobs:
           echo "VERSION=$version" >> "$GITHUB_ENV"
 
       - name: Build universal app
-        run: ./scripts/build.sh
+        run: |
+          set +e
+          ./scripts/build.sh 2>&1 | tee build.log
+          status=${PIPESTATUS[0]}
+          if [ "$status" != "0" ]; then
+            grep -nE "error:" build.log | head -20 | while IFS= read -r line; do echo "::error::${line}"; done
+            tail -n 15 build.log | while IFS= read -r line; do echo "::error::${line}"; done
+            exit "$status"
+          fi
 
       - name: Import Developer ID certificate
         if: env.HAS_SIGNING == 'true'
