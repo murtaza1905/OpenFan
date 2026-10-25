@@ -1,4 +1,5 @@
 #!/bin/bash
+# Quits OpenFan, removes the privileged helper, the app, its settings and presets.
 set -uo pipefail
 
 echo "==> Quitting OpenFan"
@@ -7,7 +8,9 @@ pkill -x OpenFan >/dev/null 2>&1 || true
 sleep 1
 
 echo "==> Removing privileged helper (asks for your password)"
-sudo launchctl bootout system/com.openfan.helper >/dev/null 2>&1 || true
+for label in com.muratonurcu.OpenFan.helper com.openfan.helper; do
+    sudo launchctl bootout "system/$label" >/dev/null 2>&1 || true
+done
 sudo pkill -x openfan-helper >/dev/null 2>&1 || true
 
 echo "==> Removing application"
@@ -15,18 +18,20 @@ rm -rf /Applications/OpenFan.app
 rm -rf ~/Applications/OpenFan.app
 
 echo "==> Removing saved settings and presets"
-defaults delete com.openfan.app >/dev/null 2>&1 || true
-rm -rf ~/Library/Caches/com.openfan.app
-rm -rf ~/Library/Saved\ Application\ State/com.openfan.app.savedState
-rm -rf ~/Library/HTTPStorages/com.openfan.app
+for domain in com.muratonurcu.OpenFan com.openfan.app; do
+    defaults delete "$domain" >/dev/null 2>&1 || true
+    rm -rf ~/Library/Caches/"$domain"
+    rm -rf ~/Library/Saved\ Application\ State/"$domain".savedState
+    rm -rf ~/Library/HTTPStorages/"$domain"
+done
 
 echo "==> Removing build output"
 SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-rm -rf "$SCRIPT_DIR/build" "$SCRIPT_DIR/OpenFan.xcodeproj"
+rm -rf "$SCRIPT_DIR/build" "$SCRIPT_DIR/dist" "$SCRIPT_DIR/OpenFan.xcodeproj"
 
 cat <<'EOF'
 
-OpenFan has been removed.
+OpenFan has been removed. Fans are back under system control.
 If "OpenFan" still appears under System Settings → General → Login Items & Extensions,
 macOS clears that stale entry on its own within a short time; toggling it off and on is harmless.
 To reinstall from scratch: ./scripts/install.sh

@@ -1,7 +1,7 @@
 import Foundation
 import os.log
 
-private let log = Logger(subsystem: "com.openfan.helper", category: "xpc")
+private let log = Logger(subsystem: "com.muratonurcu.OpenFan.helper", category: "xpc")
 
 final class HelperService: NSObject, OpenFanHelperProtocol {
     func version(reply: @escaping (String) -> Void) {

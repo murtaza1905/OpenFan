@@ -48,6 +48,7 @@ final class FanController: ObservableObject {
     private let rpmDeadband: Double = 20
 
     private init() {
+        PersistentStore.migrateLegacyDefaultsIfNeeded()
         modes = PersistentStore.load([Int: FanControlMode].self, key: PersistentStore.Key.modes) ?? [:]
         presets = PersistentStore.load([Preset].self, key: PersistentStore.Key.presets) ?? []
         settings = PersistentStore.load(AppSettings.self, key: PersistentStore.Key.settings) ?? AppSettings()

@@ -101,6 +101,9 @@ struct MenuBarView: View {
                 openWindow(id: WindowID.main)
                 NSApp.activate(ignoringOtherApps: true)
             }
+            Button(L("About OpenFan…")) {
+                AboutPanel.show()
+            }
             Spacer()
             Button(L("Quit")) {
                 NSApp.terminate(nil)

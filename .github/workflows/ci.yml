@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build (universal, ad-hoc signed)
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Toolchain
+        run: xcodebuild -version
+
+      - name: Build
+        run: ./scripts/build.sh
+
+      - name: Verify bundle
+        run: |
+          app="build/OpenFan.app"
+          lipo -archs "$app/Contents/MacOS/OpenFan" | grep -q "x86_64 arm64"
+          lipo -archs "$app/Contents/MacOS/openfan-helper" | grep -q "x86_64 arm64"
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Contents/Info.plist"
+          /usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$app/Contents/Info.plist"
+          test -f "$app/Contents/Library/LaunchDaemons/com.muratonurcu.OpenFan.helper.plist"
+          test -f "$app/Contents/Resources/PrivacyInfo.xcprivacy"
+          codesign --verify --deep --verbose=2 "$app"
+
+      - name: Upload app
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenFan-ci
+          path: build/OpenFan.app

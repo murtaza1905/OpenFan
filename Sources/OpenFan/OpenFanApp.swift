@@ -17,6 +17,9 @@ struct OpenFanApp: App {
         .defaultSize(width: 720, height: 520)
         .windowResizability(.contentMinSize)
         .commands {
+            CommandGroup(replacing: .appInfo) {
+                Button(L("About OpenFan")) { AboutPanel.show() }
+            }
             CommandGroup(replacing: .newItem) {}
         }
 

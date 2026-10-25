@@ -51,6 +51,22 @@ struct AppSettings: Codable, Equatable {
 enum PersistentStore {
     private static let defaults = UserDefaults.standard
 
+    /// Bundle identifier used by OpenFan 1.3.x and earlier. Modes, presets and
+    /// settings stored under it are copied into the current domain once, on the
+    /// first launch of 1.4.0 or later.
+    private static let legacyDomain = "com.openfan.app"
+
+    static func migrateLegacyDefaultsIfNeeded() {
+        let keys = [Key.modes, Key.presets, Key.settings]
+        guard Bundle.main.bundleIdentifier != legacyDomain,
+              keys.allSatisfy({ defaults.object(forKey: $0) == nil }),
+              let legacy = defaults.persistentDomain(forName: legacyDomain), !legacy.isEmpty else { return }
+        for key in keys {
+            if let value = legacy[key] { defaults.set(value, forKey: key) }
+        }
+        defaults.removePersistentDomain(forName: legacyDomain)
+    }
+
     static func load<T: Decodable>(_ type: T.Type, key: String) -> T? {
         guard let data = defaults.data(forKey: key) else { return nil }
         return try? JSONDecoder().decode(type, from: data)

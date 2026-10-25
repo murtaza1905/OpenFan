@@ -61,6 +61,36 @@
         }
       }
     },
+    "About": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hakkında"
+          }
+        }
+      }
+    },
+    "About OpenFan": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenFan Hakkında"
+          }
+        }
+      }
+    },
+    "About OpenFan…": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OpenFan Hakkında…"
+          }
+        }
+      }
+    },
     "All fans to Auto": {
       "localizations": {
         "tr": {
@@ -201,6 +231,16 @@
         }
       }
     },
+    "Contact": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İletişim"
+          }
+        }
+      }
+    },
     "Control": {
       "localizations": {
         "tr": {
@@ -241,6 +281,16 @@
         }
       }
     },
+    "Developer": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geliştirici"
+          }
+        }
+      }
+    },
     "Fan": {
       "localizations": {
         "tr": {
@@ -257,6 +307,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fan %ld"
+          }
+        }
+      }
+    },
+    "Fan control for Intel and Apple Silicon Macs.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Intel ve Apple Silicon Mac'ler için fan kontrolü."
           }
         }
       }
@@ -391,6 +451,16 @@
         }
       }
     },
+    "License": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lisans"
+          }
+        }
+      }
+    },
     "Manual": {
       "localizations": {
         "tr": {
@@ -497,6 +567,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sistem Ayarları'nı aç"
+          }
+        }
+      }
+    },
+    "Open source under the MIT License.": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MIT Lisansı ile açık kaynak."
           }
         }
       }
@@ -791,6 +871,26 @@
         }
       }
     },
+    "Source code": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaynak kod"
+          }
+        }
+      }
+    },
+    "Source code and issues on GitHub": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaynak kod ve hata bildirimi: GitHub"
+          }
+        }
+      }
+    },
     "Startup": {
       "localizations": {
         "tr": {
@@ -877,6 +977,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bilinmiyor"
+          }
+        }
+      }
+    },
+    "Version": {
+      "localizations": {
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm"
           }
         }
       }

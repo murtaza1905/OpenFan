@@ -1,6 +1,6 @@
 name: OpenFan
 options:
-  bundleIdPrefix: com.openfan
+  bundleIdPrefix: com.muratonurcu
   createIntermediateGroups: true
   deploymentTarget:
     macOS: "13.0"
@@ -10,6 +10,8 @@ settings:
   base:
     SWIFT_VERSION: "5.9"
     MACOSX_DEPLOYMENT_TARGET: "13.0"
+    MARKETING_VERSION: "1.4.0"
+    CURRENT_PROJECT_VERSION: "6"
     CODE_SIGN_STYLE: Automatic
     CODE_SIGN_IDENTITY: "-"
     ENABLE_HARDENED_RUNTIME: YES
@@ -23,7 +25,9 @@ targets:
       - path: Sources/OpenFan
       - path: Sources/Shared
       - path: Sources/SMC
-      - path: Resources/com.openfan.helper.plist
+      - path: Resources/PrivacyInfo.xcprivacy
+        buildPhase: resources
+      - path: Resources/com.muratonurcu.OpenFan.helper.plist
         buildPhase:
           copyFiles:
             destination: wrapper
@@ -33,11 +37,12 @@ targets:
       properties:
         CFBundleName: OpenFan
         CFBundleDisplayName: OpenFan
-        CFBundleShortVersionString: "1.3.1"
-        CFBundleVersion: "5"
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         LSUIElement: false
         LSMinimumSystemVersion: "13.0"
-        NSHumanReadableCopyright: "MIT License"
+        LSApplicationCategoryType: public.app-category.utilities
+        NSHumanReadableCopyright: "Copyright © 2026 Murat Onurcu. MIT License."
         NSPrincipalClass: NSApplication
         CFBundleDevelopmentRegion: en
         CFBundleLocalizations:
@@ -46,7 +51,7 @@ targets:
     settings:
       base:
         PRODUCT_NAME: OpenFan
-        PRODUCT_BUNDLE_IDENTIFIER: com.openfan.app
+        PRODUCT_BUNDLE_IDENTIFIER: com.muratonurcu.OpenFan
         SWIFT_OBJC_BRIDGING_HEADER: Sources/OpenFan/OpenFan-Bridging-Header.h
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     dependencies:
@@ -66,5 +71,5 @@ targets:
     settings:
       base:
         PRODUCT_NAME: openfan-helper
-        PRODUCT_BUNDLE_IDENTIFIER: com.openfan.helper
+        PRODUCT_BUNDLE_IDENTIFIER: com.muratonurcu.OpenFan.helper
         SWIFT_OBJC_BRIDGING_HEADER: Sources/openfan-helper/Helper-Bridging-Header.h

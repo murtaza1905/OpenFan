@@ -437,6 +437,18 @@ struct SettingsTab: View {
                     step: 1
                 )
             }
+
+            Section(L("About")) {
+                LabeledContent(L("Version"), value: AboutPanel.versionString)
+                LabeledContent(L("Developer"), value: AboutPanel.author)
+                LabeledContent(L("Contact")) {
+                    Link(AboutPanel.email, destination: URL(string: "mailto:\(AboutPanel.email)")!)
+                }
+                LabeledContent(L("Source code")) {
+                    Link("github.com/murtaza1905/OpenFan", destination: AboutPanel.repository)
+                }
+                LabeledContent(L("License"), value: "MIT")
+            }
         }
         .formStyle(.grouped)
     }
